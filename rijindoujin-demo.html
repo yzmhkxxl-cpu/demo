@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日进斗金 - 高端国潮主题Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 高端国潮配色 */
+            --color-primary: #C41E3A;        /* 中国红 - 更深沉 */
+            --color-primary-light: #E8344E;  /* 亮红 */
+            --color-gold: #D4AF37;           /* 鎏金 - 更典雅 */
+            --color-gold-light: #E8C547;     /* 亮金 */
+            --color-dark: #1A1A1A;           /* 墨黑 */
+            --color-gray-900: #2D2D2D;       /* 深灰 */
+            --color-gray-600: #666666;       /* 中灰 */
+            --color-gray-400: #999999;       /* 浅灰 */
+            --color-bg: #F5F0E8;             /* 米白 - 宣纸质感 */
+            --color-card: #FFFFFF;           /* 纯白卡片 */
+            
+            /* 阴影系统 - 更细腻 */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.16);
+            --shadow-gold: 0 2px 12px rgba(212, 175, 55, 0.25);
+            
+            /* 圆角系统 - 更克制 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* 动效曲线 - 更优雅 */
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+            --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: hidden; /* 禁止整个页面滚动 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, .brand-title {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* 页面容器 */
+        .page-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background: linear-gradient(180deg, var(--color-bg) 0%, #EDE7DC 100%);
+        }
+
+        /* 页面切换 */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== 登录页 ========== */
+        .login-page {
+            padding: 40px 24px 80px;
+            text-align: center;
+        }
+
+        .logo-section {
+            padding-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .caishen-logo {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .brand-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-dark);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .input-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--color-card);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            transition: all 0.2s var(--ease-out);
+            cursor: pointer;
+        }
+
+        .input-card:focus-within {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.08);
+        }
+
+        .input-icon {
+            font-size: 24px;
+        }
+
+        .input-card input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .input-card input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .btn-login {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s var(--ease-out);
+            margin-top: 24px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .register-hint {
+            margin-top: 16px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .register-link {
+            color: var(--color-primary);
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .register-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ========== AI预测页 ========== */
+        .ai-page {
+            padding: 0; /* 移除默认padding,由Hero Section和卡片控制 */
+            padding-bottom: 80px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 卡通观众席背景 */
+        .cartoon-audience {
+            position: relative;
+            height: 100px; /* 减小高度 */
+            /* 使用audience.png作为背景图片 */
+            background-image: url('images/audience.png');
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover; /* 覆盖整个区域 */
+            border-radius: 0 0 20px 20px; /* 减小圆角 */
+            margin-bottom: -16px; /* 调整负边距 */
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .audience-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px; /* 减小间距 */
+            padding: 6px 0; /* 减小内边距 */
+        }
+
+        .row-1 {
+            margin-top: 12px; /* 减小顶部边距 */
+        }
+
+        .row-2 {
+            margin-top: 2px;
+        }
+
+        .animal {
+            font-size: 24px; /* 减小emoji尺寸 */
+            opacity: 0.7; /* 降低透明度 */
+            animation: animalWave 3s ease-in-out infinite;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1)); /* 减小阴影 */
+        }
+
+        .animal:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes animalWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .crystal-ball-container {
+            text-align: center;
+            padding: 48px 0;
+        }
+
+        .crystal-ball {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--color-gold-light), var(--color-gold));
+            box-shadow: 
+                0 12px 24px rgba(196, 30, 58, 0.2),
+                inset 0 -8px 24px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            animation: glow 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s var(--ease-out);
+            position: relative;
+        }
+
+        .crystal-ball::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 30%;
+            height: 30%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+            border-radius: 50%;
+            filter: blur(8px);
+        }
+
+        .crystal-ball:hover {
+            transform: scale(1.03);
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 28px rgba(212, 175, 55, 0.45), inset 0 -8px 24px rgba(0, 0, 0, 0.1); }
+            50% { box-shadow: 0 0 34px rgba(212, 175, 55, 0.65), inset 0 -10px 28px rgba(0, 0, 0, 0.12); }
+        }
+
+        .ai-status {
+            margin-top: 16px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* AI预测页顶部标题区域 */
+        .ai-hero-section {
+            text-align: center;
+            padding: 32px 20px 24px;
+            background: linear-gradient(180deg, rgba(196, 30, 58, 0.06) 0%, rgba(212, 175, 55, 0.04) 50%, transparent 100%);
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .taiji-bg {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(196, 30, 58, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
+            animation: taijiRotate 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes taijiRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .ai-hero-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .ai-hero-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            animation: fadeInDown 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* AI未启动占位界面 */
+        .ai-placeholder {
+            background: var(--color-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px; /* 减小内边距,更紧凑 */
+            margin: 16px 20px 24px; /* 增加左右边距 */
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* AI大脑动画 */
+        .ai-brain-animation {
+            position: relative;
+            width: 100px; /* 稍微减小尺寸,更精致 */
+            height: 100px;
+            margin: 0 auto 20px; /* 减小底部边距 */
+        }
+
+        .brain-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        .brain-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ring-1 {
+            width: 70px;
+            height: 70px;
+            animation: rotate 8s linear infinite;
+        }
+
+        .ring-2 {
+            width: 95px;
+            height: 95px;
+            animation: rotate 12s linear infinite reverse;
+            border-style: dashed;
+        }
+
+        .ring-3 {
+            width: 120px;
+            height: 120px;
+            animation: rotate 16s linear infinite;
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .brain-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 14px;
+            color: var(--color-gold);
+            opacity: 0.6;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .p1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .p2 { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .p3 { bottom: 20%; left: 15%; animation-delay: 1s; }
+        .p4 { bottom: 10%; right: 20%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* 八卦阵动画 */
+        .bagua-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 24px;
+        }
+
+        .bagua-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 130px;
+            height: 130px;
+            animation: rotateBagua 20s linear infinite;
+        }
+
+        .gua-symbol {
+            position: absolute;
+            font-size: 28px; /* 增大字号,更醒目 */
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); /* 改用filter实现光晕 */
+            opacity: 0.9; /* 提高透明度 */
+            animation: zodiacGlow 2s ease-in-out infinite; /* 添加发光动画 */
+        }
+
+        .gua-symbol:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .gua-symbol:nth-child(2) { top: 15%; right: 5%; animation-delay: 0.25s; }
+        .gua-symbol:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 0.5s; }
+        .gua-symbol:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 0.75s; }
+        .gua-symbol:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
+        .gua-symbol:nth-child(6) { bottom: 15%; left: 5%; animation-delay: 1.25s; }
+        .gua-symbol:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 1.5s; }
+        .gua-symbol:nth-child(8) { top: 15%; left: 5%; animation-delay: 1.75s; }
+
+        @keyframes zodiacGlow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes rotateBagua {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .core-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), #E85D75);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(196, 30, 58, 0.5);
+            animation: pulseCore 2s ease-in-out infinite;
+        }
+
+        .core-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulseCore {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        /* 8个生肖冠军头像 */
+        .champion-avatars {
+            display: flex;
+            justify-content: center;
+            gap: 8px; /* 减小间距 */
+            margin-bottom: 16px; /* 减小底部边距 */
+            padding: 12px 8px; /* 减小内边距 */
+            background: linear-gradient(135deg, rgba(255, 179, 71, 0.1), rgba(255, 204, 153, 0.1));
+            border-radius: 16px;
+        }
+
+        .avatar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 36px; /* 确保最小宽度 */
+        }
+
+        .avatar-circle {
+            width: 40px; /* 减小尺寸 */
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px; /* 减小emoji尺寸 */
+            box-shadow: 0 3px 8px rgba(255, 165, 0, 0.3);
+            animation: avatarBounce 2s ease-in-out infinite;
+            overflow: hidden; /* 确保图片不溢出圆形框 */
+        }
+
+        /* CSS雪碧图 - 卡通角色头像 */
+        .character-sprite {
+            background-image: url('images/UI.png');
+            background-repeat: no-repeat;
+            /* 缩放雪碧图以适应40x40的圆形框 */
+            /* 原始头像尺寸58x63,缩放到40px: 40/58 ≈ 0.69,即69% */
+            background-size: 705px 357px; /* UI.png原始尺寸1024x512 * 0.69 */
+        }
+
+        /* 每个角色的background-position坐标 (根据用户提供的精确坐标+微调后缩放0.69倍,再向右调整25px后向左调整17px) */
+        /* UI.png原始尺寸: 1024x512, 缩放到: 705x357 (缩放比例0.69) */
+        /* 原始头像尺寸58x63, 缩放到约40x43 */
+        .sprite-nn { background-position: -659px -262px; }   /* 尼尼: (-642-17,-262) */
+        .sprite-mm { background-position: -663px -179px; }  /* 美美: (-646-17,-179) */
+        .sprite-bb { background-position: -665px -112px; }  /* 蹦蹦: (-648-17,-112) */
+        .sprite-qq { background-position: -619px -180px; }  /* 奇奇: (-602-17,-180) */
+        .sprite-tt { background-position: -325px -265px; }  /* 唐唐: (-308-17,-265) */
+        .sprite-dd { background-position: -662px -223px; }  /* 迪迪: (-645-17,-223) */
+        .sprite-dy { background-position: -621px -226px; }  /* 大眼: (-604-17,-226) */
+        .sprite-ff { background-position: -487px -303px; }  /* 飞飞: (-470-17,-303) */
+
+        .avatar-1 .avatar-circle { animation-delay: 0s; }
+        .avatar-2 .avatar-circle { animation-delay: 0.25s; }
+        .avatar-3 .avatar-circle { animation-delay: 0.5s; }
+        .avatar-4 .avatar-circle { animation-delay: 0.75s; }
+        .avatar-5 .avatar-circle { animation-delay: 1s; }
+        .avatar-6 .avatar-circle { animation-delay: 1.25s; }
+        .avatar-7 .avatar-circle { animation-delay: 1.5s; }
+        .avatar-8 .avatar-circle { animation-delay: 1.75s; }
+
+        @keyframes avatarBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .trophy-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-gold);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .trophy-count::before {
+            content: '';
+            font-size: 10px;
+        }
+
+        /* 跑道动画 */
+        .race-track {
+            display: none;
+            background: linear-gradient(180deg, #FFB347 0%, #FFE4C4 100%);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .race-track.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .track-lanes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .lane {
+            height: 36px; /* 从40px减小到36px,节省空间 */
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 18px; /* 调整为高度的一半 */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .runner {
+            font-size: 28px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: raceRun 3s ease-in-out forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px; /* 设置固定宽度 */
+            height: 36px; /* 设置固定高度 */
+        }
+
+        /* 跑道中的角色雪碧图样式 - 需要缩放适配 */
+        .runner.character-sprite {
+            background-image: url('images/UI.png');
+            background-repeat: no-repeat;
+        }
+
+        /* 跑道角色的background-position坐标 (根据用户提供的精确坐标+微调后缩放0.65倍,再向右调整7px) */
+        /* UI.png原始尺寸: 1024x512, 缩放到: 666x333 (缩放比例0.65) */
+        /* 原始头像尺寸58x63, 缩放到约38x41 */
+        .runner-1.sprite-nn { background-position: -621px -247px; }   /* 尼尼: (-618-3,-247) */
+        .runner-2.sprite-mm { background-position: -625px -169px; }  /* 美美: (-622-3,-169) */
+        .runner-3.sprite-bb { background-position: -627px -106px; }  /* 蹦蹦: (-624-3,-106) */
+        .runner-4.sprite-qq { background-position: -584px -170px; }  /* 奇奇: (-581-3,-170) */
+        .runner-5.sprite-tt { background-position: -306px -250px; }  /* 唐唐: (-303-3,-250) */
+        .runner-6.sprite-dd { background-position: -624px -210px; }  /* 迪迪: (-621-3,-210) */
+        .runner-7.sprite-dy { background-position: -586px -213px; }  /* 大眼: (-583-3,-213) */
+        .runner-8.sprite-ff { background-position: -459px -285px; }  /* 飞飞: (-456-3,-285) */
+
+        .runner-1 { animation-delay: 0s; }
+        .runner-2 { animation-delay: 0.1s; }
+        .runner-3 { animation-delay: 0.2s; }
+        .runner-4 { animation-delay: 0.3s; }
+        .runner-5 { animation-delay: 0.4s; }
+        .runner-6 { animation-delay: 0.5s; }
+        .runner-7 { animation-delay: 0.6s; }
+        .runner-8 { animation-delay: 0.7s; }
+
+        @keyframes raceRun { from { left: 0; } to { left: calc(100% - 36px); } }
+
+        .finish-line {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, rgba(196, 30, 58, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(196, 30, 58, 0.8) 100%);
+            border-radius: 0 12px 12px 0;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* AI数据分析加载动画 */
+        .ai-analysis-loading {
+            display: none;
+            width: calc(100% - 40px);
+            margin: 0 auto 24px;
+            padding: 18px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-analysis-loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .spinner-ring {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        .ring-1,
+        .ring-2,
+        .ring-3 {
+            position: absolute;
+            border: 4px solid rgba(196, 30, 58, 0.12);
+            border-radius: 50%;
+        }
+
+        .ring-1 {
+            width: 48px;
+            height: 48px;
+            border-top-color: rgba(196, 30, 58, 0.9);
+        }
+
+        .ring-2 {
+            width: 34px;
+            height: 34px;
+            top: 7px;
+            left: 7px;
+            border-left-color: rgba(212, 175, 55, 0.8);
+        }
+
+        .ring-3 {
+            width: 22px;
+            height: 22px;
+            top: 13px;
+            left: 13px;
+            border-bottom-color: rgba(255, 179, 71, 0.8);
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .loading-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--color-gray-600);
+            margin-bottom: 12px;
+        }
+
+        .analysis-progress {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 999px;
+            overflow: hidden;
+            height: 10px;
+        }
+
+        .progress-bar { width: 100%; }
+
+        .progress-fill {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--color-gray-600);
+            text-align: right;
+        }
+
+        .analysis-steps {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .step {
+            flex: 1;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(196, 30, 58, 0.1);
+        }
+
+        .step.active,
+        .step.completed {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+        }
+
+        .data-stream {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 0 20px 24px;
+        }
+
+        .stream-item {
+            min-width: 80px;
+            padding: 12px 14px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            color: var(--color-dark);
+            font-size: 14px;
+            animation: streamFlow 6s linear infinite;
+        }
+
+        .stream-item.changing {
+            animation: numberChange 0.8s ease-in-out;
+        }
+
+        @keyframes numberChange {
+            0% { opacity: 0.4; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.95; transform: scale(1); }
+        }
+
+        .stream-item:nth-child(1) { animation-delay: 0s; }
+        .stream-item:nth-child(2) { animation-delay: 0.2s; }
+        .stream-item:nth-child(3) { animation-delay: 0.4s; }
+        .stream-item:nth-child(4) { animation-delay: 0.6s; }
+        .stream-item:nth-child(5) { animation-delay: 0.8s; }
+        .stream-item:nth-child(6) { animation-delay: 1s; }
+        .stream-item:nth-child(7) { animation-delay: 1.2s; }
+        .stream-item:nth-child(8) { animation-delay: 1.4s; }
+
+        @keyframes streamFlow {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+
+        .ai-waiting-title {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .ai-waiting-desc {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 18px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            animation: bounce 1.8s ease-in-out infinite;
+        }
+
+        .feature-item:nth-child(1) .feature-icon { animation-delay: 0s; }
+        .feature-item:nth-child(2) .feature-icon { animation-delay: 0.3s; }
+        .feature-item:nth-child(3) .feature-icon { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .feature-text {
+            font-size: 12px;
+            color: var(--color-gray-600);
+            line-height: 1.4;
+        }
+
+        .history-scroll {
+            margin: 0 20px 24px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .analysis-hint {
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-dark);
+            font-size: 13px;
+        }
+
+        .history-content {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .history-inner {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 16s linear infinite;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .history-scroll:hover .history-inner {
+            animation-play-state: paused;
+        }
+
+        .hint-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hint-text {
+            font-size: 14px;
+            color: var(--color-gray-700);
+        }
+
+        .history-scroll h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding: 0 18px;
+            color: var(--color-dark);
+        }
+
+        .history-item {
+            min-width: 170px;
+            padding: 12px 16px;
+            margin-right: 12px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            color: var(--color-gray-900);
+            font-size: 13px;
+        }
+
+        .history-item:last-child {
+            margin-right: 0;
+        }
+
+        .period-text {
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--color-dark);
+        }
+
+        .zodiac-balls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .zodiac-ball {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            background: rgba(212, 175, 55, 0.14);
+            color: var(--color-dark);
+            font-size: 12px;
+        }
+
+        .zodiac-ball:hover {
+            background: rgba(212, 175, 55, 0.22);
+        }
+
+        .btn-start-money {
+            width: calc(100% - 40px);
+            margin: 0 20px 24px;
+            padding: 16px 0;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .btn-start-money:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-start-money:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .btn-start-money:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .launch-hint {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-gray-600);
+            margin-bottom: 16px;
+        }
+
+        .ai-action-section {
+            padding: 0 0 40px;
+        }
+
+        /* ========== 游戏中心页 ========== */
+        .games-page {
+            padding: 32px 20px 80px;
+        }
+
+        .countdown-card {
+            background: var(--color-card);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sandglass-icon {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .countdown-label {
+            color: var(--color-gray-600);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .time-group {
+            text-align: center;
+        }
+
+        .flip-digit {
+            display: inline-block;
+            width: 48px;
+            height: 56px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.12));
+            color: var(--color-dark);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 56px;
+            letter-spacing: 1px;
+            box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .time-unit {
+            font-size: 12px;
+            color: var(--color-gray-500);
+            margin-top: 6px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin: 22px 0 12px;
+        }
+
+        .history-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .history-list {
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .history-card {
+            background: var(--color-card);
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease;
+        }
+
+        .history-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-period {
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .card-date {
+            color: var(--color-gray-500);
+            font-size: 12px;
+        }
+
+        /* ========== 个人中心页 ========== */
+        .profile-page {
+            padding: 32px 20px 80px;
+        }
+
+        .identity-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-wrapper {
+            width: 74px;
+            height: 74px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.16), rgba(212, 175, 55, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-wrapper:hover {
+            transform: translateY(-2px);
+        }
+
+        .username {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .invite-code {
+            font-size: 12px;
+            color: var(--color-gray-500);
+            margin-top: 6px;
+        }
+
+        .balance-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 240, 232, 0.96));
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 50%);
+            border-radius: 50%;
+        }
+
+        .balance-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .piggy-bank {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 20px rgba(196, 30, 58, 0.18);
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: var(--color-gray-500);
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .today-profit {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-gray-600);
+            font-size: 13px;
+        }
+
+        .profit-value {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px 0;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--color-gray-600);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-dark);
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.14), rgba(212, 175, 55, 0.14));
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.14);
+        }
+
+        .tab-btn:hover:not(.active) {
+            transform: translateY(-1px);
+        }
+
+        /* 盈利统计卡片 */
+        .profit-summary {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .profit-summary.active {
+            display: grid;
+        }
+
+        .profit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .profit-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .profit-icon {
+            font-size: 18px;
+        }
+
+        .profit-value-large {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .profit-trend {
+            font-size: 12px;
+            color: var(--color-gray-600);
+        }
+
+        .trend-up {
+            color: var(--color-primary);
+        }
+
+        .coin-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .coin-stack {
+            width: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .stack-coins {
+            width: 100%;
+            height: 18px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.5), rgba(255, 204, 153, 0.5));
+            animation: dropIn 0.8s ease;
+        }
+
+        .coin {
+            width: 100%;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 234, 0, 0.95));
+        }
+
+        .coin:hover {
+            opacity: 0.9;
+        }
+
+        @keyframes dropIn {
+            from { transform: translateY(-6px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stack-label {
+            font-size: 10px;
+            color: var(--color-gray-500);
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 16px 0;
+            border: none;
+            border-radius: 16px;
+            background: rgba(196, 30, 58, 0.1);
+            color: var(--color-primary);
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-logout:hover {
+            background: rgba(196, 30, 58, 0.18);
+        }
+
+        /* ========== 底部导航栏 ========== */
+        .bottom-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 74px;
+            background: var(--color-card);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--color-gray-500);
+            font-size: 11px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-item.active .nav-icon {
+            color: var(--color-primary);
+        }
+
+        .nav-item.active .nav-label {
+            color: var(--color-primary);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 提示弹窗 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 999px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 100;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- 登录页 -->
+        <div class="page login-page active" id="page-login">
+            <div class="logo-section">
+                <div class="caishen-logo">财神</div>
+                <div class="brand-title">日进斗金</div>
+                <div class="brand-subtitle">高端国潮AI预测体验</div>
+            </div>
+            <div class="input-card">
+                <span class="input-icon">📱</span>
+                <input type="text" id="login-account" placeholder="手机号 / 账号">
+            </div>
+            <div class="input-card">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="login-password" placeholder="密码">
+            </div>
+            <button class="btn-login" onclick="handleLogin()">登录</button>
+            <div class="register-hint">
+                还没有账号？<span class="register-link" onclick="switchPage('register')">立即注册</span>
+            </div>
+        </div>
+
+        <!-- 注册页 -->
+        <div class="page login-page" id="page-register">
+            <div class="logo-section">
+                <div class="caishen-logo">🧧</div>
+                <div class="brand-title">注册账户</div>
+                <div class="brand-subtitle">开启国潮AI财富预测之旅</div>
+            </div>
+            <div class="input-card">
+                <span class="input-icon">👤</span>
+                <input type="text" id="register-name" placeholder="昵称">
+            </div>
+            <div class="input-card">
+                <span class="input-icon">📱</span>
+                <input type="text" id="register-account" placeholder="手机号 / 账号">
+            </div>
+            <div class="input-card">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="register-password" placeholder="设置密码">
+            </div>
+            <button class="btn-login" onclick="handleRegister()">注册</button>
+            <div class="register-hint">
+                已有账号？<span class="register-link" onclick="switchPage('login')">返回登录</span>
+            </div>
+        </div>
+
+        <!-- AI预测页 -->
+        <div class="page ai-page" id="page-ai">
+            <div class="ai-hero-section">
+                <div class="taiji-bg"></div>
+                <div class="ai-hero-title">AI财富预测</div>
+                <div class="ai-hero-subtitle">实时监测趋势，洞察未来。让国潮与财富预测在指尖相遇。</div>
+            </div>
+            <div class="cartoon-audience"></div>
+            <div class="crystal-ball-container">
+                <div class="crystal-ball" onclick="toggleAI()">✨</div>
+                <div class="ai-status" id="ai-status-text">点击水晶球，开启AI预测</div>
+            </div>
+            <div class="ai-placeholder" id="ai-placeholder">
+                <div class="ai-brain-animation">
+                    <div class="brain-core"></div>
+                    <div class="brain-ring ring-1"></div>
+                    <div class="brain-ring ring-2"></div>
+                    <div class="brain-ring ring-3"></div>
+                    <div class="brain-particles">
+                        <div class="particle p1">⚡</div>
+                        <div class="particle p2">✨</div>
+                        <div class="particle p3">💫</div>
+                        <div class="particle p4">🔥</div>
+                    </div>
+                </div>
+                <div class="bagua-container">
+                    <div class="bagua-ring">
+                        <div class="gua-symbol">乾</div>
+                        <div class="gua-symbol">坤</div>
+                        <div class="gua-symbol">震</div>
+                        <div class="gua-symbol">巽</div>
+                        <div class="gua-symbol">坎</div>
+                        <div class="gua-symbol">离</div>
+                        <div class="gua-symbol">艮</div>
+                        <div class="gua-symbol">兑</div>
+                    </div>
+                    <div class="core-circle"><span class="core-text">赢</span></div>
+                </div>
+                <div class="champion-avatars">
+                    <div class="avatar-item avatar-1"><div class="avatar-circle character-sprite sprite-nn"></div><div class="trophy-count">3</div></div>
+                    <div class="avatar-item avatar-2"><div class="avatar-circle character-sprite sprite-mm"></div><div class="trophy-count">5</div></div>
+                    <div class="avatar-item avatar-3"><div class="avatar-circle character-sprite sprite-bb"></div><div class="trophy-count">8</div></div>
+                    <div class="avatar-item avatar-4"><div class="avatar-circle character-sprite sprite-qq"></div><div class="trophy-count">2</div></div>
+                    <div class="avatar-item avatar-5"><div class="avatar-circle character-sprite sprite-tt"></div><div class="trophy-count">7</div></div>
+                    <div class="avatar-item avatar-6"><div class="avatar-circle character-sprite sprite-dd"></div><div class="trophy-count">4</div></div>
+                    <div class="avatar-item avatar-7"><div class="avatar-circle character-sprite sprite-dy"></div><div class="trophy-count">6</div></div>
+                    <div class="avatar-item avatar-8"><div class="avatar-circle character-sprite sprite-ff"></div><div class="trophy-count">1</div></div>
+                </div>
+                <div class="race-track" id="race-track">
+                    <div class="finish-line"></div>
+                    <div class="track-lanes">
+                        <div class="lane"><div class="runner runner-1 character-sprite sprite-nn"></div></div>
+                        <div class="lane"><div class="runner runner-2 character-sprite sprite-mm"></div></div>
+                        <div class="lane"><div class="runner runner-3 character-sprite sprite-bb"></div></div>
+                        <div class="lane"><div class="runner runner-4 character-sprite sprite-qq"></div></div>
+                        <div class="lane"><div class="runner runner-5 character-sprite sprite-tt"></div></div>
+                        <div class="lane"><div class="runner runner-6 character-sprite sprite-dd"></div></div>
+                        <div class="lane"><div class="runner runner-7 character-sprite sprite-dy"></div></div>
+                        <div class="lane"><div class="runner runner-8 character-sprite sprite-ff"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-analysis-loading" id="analysis-loading">
+                <div class="loading-spinner">
+                    <div class="spinner-ring">
+                        <div class="ring-1"></div>
+                        <div class="ring-2"></div>
+                        <div class="ring-3"></div>
+                    </div>
+                </div>
+                <div class="loading-text">AI 正在分析最新数据，请稍候...</div>
+                <div class="analysis-progress"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="progress-text" id="progress-text">0%</div>
+                <div class="analysis-steps">
+                    <div class="step" id="step-1"></div>
+                    <div class="step" id="step-2"></div>
+                    <div class="step" id="step-3"></div>
+                </div>
+            </div>
+            <div class="data-stream" id="data-stream">
+                <div class="stream-item">AI算力 98%</div>
+                <div class="stream-item">预测精度 94%</div>
+                <div class="stream-item">趋势指数 +8.6</div>
+                <div class="stream-item">连胜时长 12</div>
+                <div class="stream-item">分析次数 468</div>
+                <div class="stream-item">风险评估 低</div>
+                <div class="stream-item">热点区间 03-09</div>
+                <div class="stream-item">资金流向 强</div>
+            </div>
+            <div class="ai-waiting-title">财富风向已就绪</div>
+            <div class="ai-waiting-desc">点击水晶球或上方按钮开始预测，系统将自动为你匹配最优方案。</div>
+            <div class="ai-features">
+                <div class="feature-item"><div class="feature-icon">🧠</div><div class="feature-text">智能预测</div></div>
+                <div class="feature-item"><div class="feature-icon">🎯</div><div class="feature-text">精准命中</div></div>
+                <div class="feature-item"><div class="feature-icon">🌊</div><div class="feature-text">实时趋势</div></div>
+            </div>
+            <div class="history-scroll">
+                <div class="analysis-hint"><span class="hint-icon">📈</span><span class="hint-text">近期爆款预测已上线，点击历史记录查看更多。</span></div>
+                <div class="history-inner">
+                    <div class="history-item"><div class="period-text">第 2026 期</div><div>号码: 03 / 08 / 16 / 21 / 33 / 42</div></div>
+                    <div class="history-item"><div class="period-text">第 2025 期</div><div>号码: 01 / 05 / 17 / 24 / 30 / 39</div></div>
+                    <div class="history-item"><div class="period-text">第 2024 期</div><div>号码: 02 / 07 / 19 / 22 / 31 / 40</div></div>
+                    <div class="history-item"><div class="period-text">第 2023 期</div><div>号码: 04 / 10 / 15 / 26 / 34 / 43</div></div>
+                </div>
+            </div>
+            <button class="btn-start-money" onclick="startAI()">开始赚钱</button>
+            <div class="launch-hint">AI预测支持一键切换，当前保留为页面演示效果。</div>
+            <div class="ai-action-section"></div>
+        </div>
+
+        <!-- 游戏中心页 -->
+        <div class="page games-page" id="page-games">
+            <div class="countdown-card">
+                <div class="sandglass-icon">⏳</div>
+                <div class="countdown-label">下次开奖倒计时</div>
+                <div class="countdown-timer">
+                    <div class="time-group"><div class="flip-digit" id="countdown-min">05</div><div class="time-unit">分钟</div></div>
+                    <div class="time-group"><div class="flip-digit" id="countdown-sec">23</div><div class="time-unit">秒</div></div>
+                </div>
+            </div>
+            <div class="section-title">历史开奖</div>
+            <div class="history-list">
+                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-15</div><div class="card-date">#2026-072</div></div><div>开奖号码：01 08 19 24 35 46</div></div>
+                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-14</div><div class="card-date">#2026-071</div></div><div>开奖号码：02 11 23 29 37 45</div></div>
+                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-13</div><div class="card-date">#2026-070</div></div><div>开奖号码：03 12 21 30 34 44</div></div>
+            </div>
+        </div>
+
+        <!-- 个人中心页 -->
+        <div class="page profile-page" id="page-profile">
+            <div class="identity-section">
+                <div class="avatar-wrapper"><span style="font-size: 28px;">👑</span></div>
+                <div>
+                    <div class="username">VIP用户</div>
+                    <div class="invite-code">邀请码：RJ2026</div>
+                </div>
+            </div>
+            <div class="balance-card">
+                <div class="piggy-bank">🐷</div>
+                <div class="balance-label">今日收益</div>
+                <div class="balance-amount">+1,280</div>
+                <div class="today-profit">今日趋势：<span class="profit-value">+12.8%</span></div>
+            </div>
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab(this, 'daily')">日</button>
+                <button class="tab-btn" onclick="switchTab(this, 'weekly')">周</button>
+                <button class="tab-btn" onclick="switchTab(this, 'monthly')">月</button>
+            </div>
+            <div class="profit-summary active">
+                <div>
+                    <div class="profit-header"><span class="profit-title">总收益</span><span class="profit-icon">💰</span></div>
+                    <div class="profit-value-large">18,920</div>
+                    <div class="profit-trend trend-up">+18.9%</div>
+                </div>
+                <div>
+                    <div class="profit-header"><span class="profit-title">本月收益</span><span class="profit-icon">📈</span></div>
+                    <div class="profit-value-large">5,420</div>
+                    <div class="profit-trend trend-up">+10.4%</div>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="handleLogout()">退出登录</button>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchPage('ai')"><div class="nav-icon">🏠</div><div class="nav-label">预测</div></div>
+            <div class="nav-item" onclick="switchPage('games')"><div class="nav-icon">🎮</div><div class="nav-label">游戏</div></div>
+            <div class="nav-item" onclick="switchPage('profile')"><div class="nav-icon">👤</div><div class="nav-label">我的</div></div>
+        </div>
+
+        <!-- Toast提示 -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        // 页面切换
+        function switchPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById(`page-${pageName}`).classList.add('active');
+            document.querySelector(`.nav-item[onclick="switchPage('${pageName}')"]`)?.classList.add('active');
+        }
+
+        // 登录处理
+        function handleLogin() {
+            showToast('登录成功，欢迎回来！');
+            switchPage('ai');
+        }
+
+        // 注册处理
+        function handleRegister() {
+            showToast('注册成功，正在为您准备未来财富预测。');
+            switchPage('ai');
+        }
+
+        // AI预测开关
+        let isAICalculating = false;
+        function toggleAI() {
+            if (isAICalculating) {
+                stopAI();
+            } else {
+                startAI();
+            }
+        }
+
+        let dataStreamInterval = null;
+        let analysisInterval = null; // 进度条定时器
+        let analysisTimeout = null; // 跑道→分析切换定时器
+        let analysisCompleteTimeout = null; // 分析完成后的延迟定时器
+        let isAnalysisRunning = false; // 分析运行状态标志
+        
+        function randomizeDataStream() {
+            const dataItems = Array.from(document.querySelectorAll('.stream-item'));
+            dataItems.forEach(item => {
+                const values = ['98%', '94%', '+8.6', '12', '468', '低', '03-09', '强'];
+                item.textContent = values[Math.floor(Math.random() * values.length)];
+                item.classList.add('changing');
+                setTimeout(() => item.classList.remove('changing'), 600);
+            });
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function startDataStream() {
+            if (dataStreamInterval) return;
+            dataStreamInterval = setInterval(randomizeDataStream, 2200);
+        }
+        
+        function stopDataStream() {
+            clearInterval(dataStreamInterval);
+            dataStreamInterval = null;
+        }
+
+        function startAI() {
+            if (isAICalculating) return;
+            isAICalculating = true;
+            showToast('AI预测启动中，请稍候...');
+            document.getElementById('ai-status-text').textContent = 'AI正在计算，请稍候...';
+            document.getElementById('race-track').classList.add('active');
+            document.getElementById('analysis-loading').classList.remove('active');
+            startDataStream();
+
+            analysisTimeout = setTimeout(() => {
+                document.getElementById('analysis-loading').classList.add('active');
+                document.getElementById('progress-text').textContent = '0%';
+                let progress = 0;
+
+                analysisInterval = setInterval(() => {
+                    progress += 8;
+                    document.getElementById('progress-fill').style.width = `${progress}%`;
+                    document.getElementById('progress-text').textContent = `${progress}%`;
+                    if (progress >= 100) {
+                        clearInterval(analysisInterval);
+                        showToast('AI预测完成，已为您推荐最新方案。');
+                        document.getElementById('ai-status-text').textContent = 'AI预测已完成，结果已更新。';
+                        isAICalculating = false;
+                    }
+                }, 360);
+            }, 2800);
+        }
+
+        function stopAI() {
+            isAICalculating = false;
+            clearInterval(analysisInterval);
+            clearTimeout(analysisTimeout);
+            document.getElementById('race-track').classList.remove('active');
+            document.getElementById('analysis-loading').classList.remove('active');
+            document.getElementById('ai-status-text').textContent = 'AI预测已停止。';
+            stopDataStream();
+        }
+
+        function showBallDetail(ball) {
+            showToast(`球号 ${ball} 详情暂未开放`);
+        }
+
+        function showHistoryDetail(period) {
+            showToast(`展开第 ${period} 期详情`);
+        }
+
+        function switchTab(btn, period) {
+            document.querySelectorAll('.tab-btn').forEach(item => item.classList.remove('active'));
+            btn.classList.add('active');
+            showToast(`切换到${period}统计`);
+        }
+
+        function handleLogout() {
+            showToast('已退出登录，欢迎下次再来。');
+            switchPage('login');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        let countdownSeconds = 323; // 初始值: 5分23秒
+        
+        function updateCountdown() {
+            if (countdownSeconds <= 0) {
+                countdownSeconds = 323;
+            }
+            const minutes = String(Math.floor(countdownSeconds / 60)).padStart(2, '0');
+            const seconds = String(countdownSeconds % 60).padStart(2, '0');
+            document.getElementById('countdown-min').textContent = minutes;
+            document.getElementById('countdown-sec').textContent = seconds;
+            countdownSeconds -= 1;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        switchPage('login');
+    </script>
+</body>
+</html>
