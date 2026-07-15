@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -256,8 +256,12 @@
         }
 
         @keyframes animalWave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
         }
 
         .crystal-ball-container {
@@ -272,7 +276,7 @@
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, var(--color-gold-light), var(--color-gold));
             box-shadow: 
-                0 12px 24px rgba(196, 30, 58, 0.2),
+                0 8px 32px rgba(212, 175, 55, 0.3),
                 inset 0 -8px 24px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
@@ -301,8 +305,12 @@
         }
 
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 28px rgba(212, 175, 55, 0.45), inset 0 -8px 24px rgba(0, 0, 0, 0.1); }
-            50% { box-shadow: 0 0 34px rgba(212, 175, 55, 0.65), inset 0 -10px 28px rgba(0, 0, 0, 0.12); }
+            0%, 100% { 
+                box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                box-shadow: 0 12px 48px rgba(212, 175, 55, 0.5);
+            }
         }
 
         .ai-status {
@@ -356,8 +364,14 @@
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* AI未启动占位界面 */
@@ -370,6 +384,11 @@
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(212, 175, 55, 0.15);
             animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         /* AI大脑动画 */
@@ -394,8 +413,14 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.8;
+            }
         }
 
         .brain-ring {
@@ -454,8 +479,14 @@
         .p4 { bottom: 10%; right: 20%; animation-delay: 1.5s; }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); opacity: 0.6; }
-            50% { transform: translateY(-6px); opacity: 1; }
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-10px) rotate(180deg);
+                opacity: 1;
+            }
         }
 
         /* 八卦阵动画 */
@@ -494,8 +525,14 @@
         .gua-symbol:nth-child(8) { top: 15%; left: 5%; animation-delay: 1.75s; }
 
         @keyframes zodiacGlow {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.9));
+                transform: scale(1.1);
+            }
         }
 
         @keyframes rotateBagua {
@@ -527,8 +564,14 @@
         }
 
         @keyframes pulseCore {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.08); }
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 30px rgba(196, 30, 58, 0.5);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+                box-shadow: 0 0 40px rgba(196, 30, 58, 0.7);
+            }
         }
 
         /* 8个生肖冠军头像 */
@@ -595,8 +638,12 @@
         .avatar-8 .avatar-circle { animation-delay: 1.75s; }
 
         @keyframes avatarBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-6px) scale(1.05);
+            }
         }
 
         .trophy-count {
@@ -661,6 +708,9 @@
         .runner.character-sprite {
             background-image: url('images/UI.png');
             background-repeat: no-repeat;
+            /* 缩放雪碧图以适应36x36的圆形框 */
+            /* 原始头像尺寸58x63,缩放到36px: 36/58 ≈ 0.62,但为了更好显示效果,使用0.65 */
+            background-size: 666px 333px; /* UI.png原始尺寸1024x512 * 0.65 */
         }
 
         /* 跑道角色的background-position坐标 (根据用户提供的精确坐标+微调后缩放0.65倍,再向右调整7px) */
@@ -684,158 +734,185 @@
         .runner-7 { animation-delay: 0.6s; }
         .runner-8 { animation-delay: 0.7s; }
 
-        @keyframes raceRun { from { left: 0; } to { left: calc(100% - 36px); } }
+        @keyframes raceRun {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: calc(100% - 40px);
+            }
+        }
 
         .finish-line {
             position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            background: linear-gradient(180deg, rgba(196, 30, 58, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(196, 30, 58, 0.8) 100%);
-            border-radius: 0 12px 12px 0;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-gold);
+            background: rgba(255, 215, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 10;
         }
 
         /* AI数据分析加载动画 */
         .ai-analysis-loading {
             display: none;
-            width: calc(100% - 40px);
-            margin: 0 auto 24px;
-            padding: 18px 16px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: var(--shadow-sm);
+            padding: 30px 20px;
+            text-align: center;
         }
 
         .ai-analysis-loading.active {
             display: block;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .loading-spinner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 16px;
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
         }
 
         .spinner-ring {
-            position: relative;
-            width: 48px;
-            height: 48px;
-            animation: spin 1.2s linear infinite;
-        }
-
-        .ring-1,
-        .ring-2,
-        .ring-3 {
             position: absolute;
-            border: 4px solid rgba(196, 30, 58, 0.12);
             border-radius: 50%;
+            border: 3px solid transparent;
         }
 
         .ring-1 {
-            width: 48px;
-            height: 48px;
-            border-top-color: rgba(196, 30, 58, 0.9);
+            width: 100%;
+            height: 100%;
+            border-top-color: var(--color-gold);
+            animation: spin 1.5s linear infinite;
         }
 
         .ring-2 {
-            width: 34px;
-            height: 34px;
-            top: 7px;
-            left: 7px;
-            border-left-color: rgba(212, 175, 55, 0.8);
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-right-color: var(--color-red);
+            animation: spin 1.2s linear infinite reverse;
         }
 
         .ring-3 {
-            width: 22px;
-            height: 22px;
-            top: 13px;
-            left: 13px;
-            border-bottom-color: rgba(255, 179, 71, 0.8);
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-bottom-color: var(--color-primary);
+            animation: spin 0.9s linear infinite;
         }
 
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         .loading-text {
-            text-align: center;
             font-size: 14px;
-            color: var(--color-gray-600);
-            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-top: 10px;
         }
 
         .analysis-progress {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 999px;
-            overflow: hidden;
-            height: 10px;
+            margin-bottom: 20px;
         }
 
-        .progress-bar { width: 100%; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
 
         .progress-fill {
-            width: 0;
             height: 100%;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-            transition: width 0.4s ease;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-red));
+            transition: width 0.3s ease;
+            border-radius: 4px;
         }
 
         .progress-text {
-            margin-top: 8px;
             font-size: 12px;
-            color: var(--color-gray-600);
-            text-align: right;
+            font-weight: 600;
+            color: var(--color-gold);
         }
 
         .analysis-steps {
-            display: flex;
-            gap: 10px;
-            justify-content: space-between;
-            margin-top: 16px;
+            text-align: left;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
         .step {
-            flex: 1;
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(196, 30, 58, 0.1);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
         }
 
-        .step.active,
+        .step.active {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
         .step.completed {
-            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            color: #4CAF50;
         }
 
+        /* 数据流效果 */
         .data-stream {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
             justify-content: center;
-            margin: 0 20px 24px;
+            gap: 6px; /* 减小间距,更紧凑 */
+            margin-bottom: 16px; /* 减小底部边距 */
+            padding: 8px 12px; /* 减小内边距 */
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.03) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(212, 175, 55, 0.03) 100%);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .stream-item {
-            min-width: 80px;
-            padding: 12px 14px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-            color: var(--color-dark);
-            font-size: 14px;
-            animation: streamFlow 6s linear infinite;
+            font-size: 14px; /* 稍微减小字号 */
+            font-weight: 600;
+            color: var(--color-gold);
+            padding: 3px 6px; /* 减小内边距 */
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 4px;
+            animation: streamFlow 3s ease-in-out infinite;
+            transition: all 0.3s ease; /* 数字变化时的过渡效果 */
         }
 
+        /* 数字变化时的闪烁效果 */
         .stream-item.changing {
-            animation: numberChange 0.8s ease-in-out;
+            animation: numberChange 0.3s ease-out;
         }
 
         @keyframes numberChange {
-            0% { opacity: 0.4; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.95; transform: scale(1); }
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .stream-item:nth-child(1) { animation-delay: 0s; }
@@ -848,52 +925,61 @@
         .stream-item:nth-child(8) { animation-delay: 1.4s; }
 
         @keyframes streamFlow {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-            100% { transform: translateY(0); }
+            0%, 100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-4px);
+            }
         }
 
         .ai-waiting-title {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--color-dark);
+            font-size: 18px; /* 稍微减小字号 */
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px; /* 减小间距 */
+            letter-spacing: 1px;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
         }
 
         .ai-waiting-desc {
-            margin-top: 8px;
-            font-size: 14px;
-            color: var(--color-gray-600);
-            line-height: 1.6;
-            padding: 0 20px;
+            font-size: 13px; /* 稍微减小字号 */
+            color: var(--text-secondary);
+            margin-bottom: 20px; /* 减小与功能特性的间距 */
+            line-height: 1.5;
+            animation: fadeInUp 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .ai-features {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 8px; /* 减小间距,更紧凑 */
+            animation: fadeInUp 0.6s ease-out 0.7s both;
         }
 
         .feature-item {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px; /* 减小图标与文字的间距 */
         }
 
         .feature-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 10px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            animation: bounce 1.8s ease-in-out infinite;
+            font-size: 22px; /* 稍微减小图标 */
+            animation: bounce 2s ease-in-out infinite;
         }
 
         .feature-item:nth-child(1) .feature-icon { animation-delay: 0s; }
@@ -902,149 +988,185 @@
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-8px); }
         }
 
         .feature-text {
             font-size: 12px;
-            color: var(--color-gray-600);
-            line-height: 1.4;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .history-scroll {
-            margin: 0 20px 24px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.92);
-            overflow: hidden;
-            position: relative;
+            background: var(--color-card);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 24px 0;
+            height: 320px; /* 固定高度 */
+            overflow: hidden; /* 隐藏溢出,不使用滚动条 */
             box-shadow: var(--shadow-sm);
+            position: relative;
         }
 
+        /* 数据分析提示 - 固定在顶部 */
         .analysis-hint {
-            padding: 14px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: var(--color-dark);
-            font-size: 13px;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), rgba(196, 30, 58, 0.1));
+            border-radius: 8px;
+            margin-bottom: 16px;
+            animation: fadeInOut 2s ease-in-out infinite;
+            position: relative;
+            z-index: 10; /* 确保在最上层 */
         }
 
+        /* 历史记录内容容器 - 用于跑马灯动画 */
         .history-content {
+            /* 设置一个固定高度的滚动区域 */
+            height: calc(100% - 60px); /* 减去提示框和标题的高度 */
             overflow: hidden;
             position: relative;
         }
 
+        /* 内部滚动容器 - 实际执行动画的元素 */
         .history-inner {
-            display: flex;
-            width: max-content;
-            animation: marqueeScroll 16s linear infinite;
+            animation: marqueeScroll 20s linear infinite; /* 20秒完成一次循环 */
+            will-change: transform; /* 优化性能 */
         }
 
         @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%); /* 滚动到一半位置(复制的数据) */
+            }
         }
 
+        /* 暂停动画当鼠标悬停时 */
         .history-scroll:hover .history-inner {
             animation-play-state: paused;
         }
 
         .hint-icon {
-            width: 34px;
-            height: 34px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-gold);
+            border-top-color: transparent;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
         .hint-text {
             font-size: 14px;
-            color: var(--color-gray-700);
+            color: var(--color-primary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .history-scroll h3 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 12px;
-            padding: 0 18px;
             color: var(--color-dark);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
         }
 
         .history-item {
-            min-width: 170px;
-            padding: 12px 16px;
-            margin-right: 12px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            color: var(--color-gray-900);
-            font-size: 13px;
+            display: flex;
+            flex-direction: column; /* 垂直排列: 期号在上,号码在下 */
+            align-items: stretch; /* 拉伸子元素占满宽度 */
+            padding: 14px;
+            background: #F9F7F3;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            width: 100%; /* 确保占满容器宽度 */
         }
 
         .history-item:last-child {
-            margin-right: 0;
+            margin-bottom: 0;
         }
 
         .period-text {
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--color-dark);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px; /* 期号和号码之间的间距 */
+            font-size: 15px;
         }
 
         .zodiac-balls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
+            justify-content: space-between; /* 均匀分布,两端对齐 */
+            width: 100%; /* 占满父容器宽度 */
+            gap: 6px; /* 稍微增加间距,更舒展 */
         }
 
         .zodiac-ball {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 999px;
-            background: rgba(212, 175, 55, 0.14);
-            color: var(--color-dark);
-            font-size: 12px;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            background: #F5F0E8;
+            border-radius: 50%;
+            font-size: 16px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-shadow: 
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                0 -1px 0 #000,
+                0 1px 0 #000,
+                -1px 0 0 #000,
+                1px 0 0 #000;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
         }
 
         .zodiac-ball:hover {
-            background: rgba(212, 175, 55, 0.22);
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
         .btn-start-money {
-            width: calc(100% - 40px);
-            margin: 0 20px 24px;
-            padding: 16px 0;
-            border-radius: 16px;
+            width: 100%;
+            height: 56px;
             border: none;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
             color: white;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 2px;
             cursor: pointer;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-gold);
+            transition: all 0.2s var(--ease-out);
+            animation: btnPulse 2s ease-in-out infinite; /* 添加脉冲动画 */
         }
 
         @keyframes btnPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            0%, 100% {
+                box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+            }
+            50% {
+                box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.3);
+            }
         }
 
         .btn-start-money:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         .btn-start-money:active:not(:disabled) {
@@ -1052,52 +1174,50 @@
         }
 
         .btn-start-money:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
         .launch-hint {
             text-align: center;
-            font-size: 13px;
-            color: var(--color-gray-600);
-            margin-bottom: 16px;
+            margin-top: 12px; /* 减小与按钮的间距 */
+            color: var(--text-secondary);
+            font-size: 13px; /* 稍微减小字号 */
         }
 
+        /* AI操作区域容器 */
         .ai-action-section {
-            padding: 0 0 40px;
+            padding: 0 20px; /* 左右边距 */
         }
 
         /* ========== 游戏中心页 ========== */
         .games-page {
-            padding: 32px 20px 80px;
+            padding: 20px;
+            padding-bottom: 75px; /* 底部边距,避免内容贴导航栏 */
         }
 
         .countdown-card {
-            background: var(--color-card);
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 20px;
             text-align: center;
+            padding: 24px 20px; /* 稍微减小内边距 */
+            background: var(--color-card);
+            border-radius: var(--radius-lg);
+            margin-bottom: 20px; /* 与标题的间距 */
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
 
         .sandglass-icon {
-            display: inline-block;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.18));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+            font-size: 42px;
             margin-bottom: 12px;
+            display: inline-block;
+            opacity: 0.9;
         }
 
         .countdown-label {
-            color: var(--color-gray-600);
-            font-size: 13px;
-            margin-bottom: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
         }
 
         .countdown-timer {
@@ -1107,382 +1227,450 @@
         }
 
         .time-group {
-            text-align: center;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
         }
 
         .flip-digit {
-            display: inline-block;
-            width: 48px;
-            height: 56px;
-            border-radius: 18px;
-            background: linear-gradient(180deg, rgba(196, 30, 58, 0.12), rgba(212, 175, 55, 0.12));
+            width: 42px;
+            height: 52px;
+            line-height: 52px;
+            text-align: center;
+            background: linear-gradient(180deg, #FAFAFA, #F5F5F5);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius-sm);
+            font-size: 26px;
+            font-weight: 600;
             color: var(--color-dark);
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 56px;
-            letter-spacing: 1px;
-            box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .time-unit {
-            font-size: 12px;
-            color: var(--color-gray-500);
-            margin-top: 6px;
+            font-size: 13px;
+            color: var(--color-gray-600);
+            font-weight: 500;
         }
 
         .section-title {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-dark);
-            margin: 22px 0 12px;
+            margin-bottom: 12px; /* 与列表的间距 */
+            letter-spacing: 1px;
+            padding-left: 4px; /* 增加左侧视觉对齐 */
         }
 
         .history-list {
-            display: grid;
-            gap: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: calc(100vh - 375px); /* 减去顶部倒计时、标题和底部导航 */
+            overflow-y: auto;
+            padding-right: 4px;
+            padding-bottom: 20px; /* 最后一条记录与导航栏的间距 */
         }
 
+        /* 隐藏滚动条 */
         .history-list::-webkit-scrollbar {
+            width: 0;
+            height: 0;
             display: none;
         }
 
         .history-list {
-            max-height: 280px;
-            overflow-y: auto;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
 
         .history-card {
             background: var(--color-card);
-            border-radius: 18px;
-            padding: 16px;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s ease;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            padding: 14px 16px; /* 增加左右内边距 */
+            transition: all 0.2s var(--ease-out);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); /* 轻微阴影增强层次 */
         }
 
         .history-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 10px; /* 与球号的间距 */
         }
 
         .card-period {
-            font-weight: 700;
-            color: var(--color-dark);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+            letter-spacing: 0.5px; /* 增加字间距提升精致感 */
         }
 
         .card-date {
-            color: var(--color-gray-500);
             font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.8; /* 稍微淡化日期,突出期号 */
         }
 
         /* ========== 个人中心页 ========== */
         .profile-page {
-            padding: 32px 20px 80px;
+            padding: 24px 20px;
+            padding-bottom: 80px;
         }
 
         .identity-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 28px;
         }
 
         .avatar-wrapper {
-            width: 74px;
-            height: 74px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.16), rgba(212, 175, 55, 0.2));
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F0E6D3, #E8DDD0);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            box-shadow: var(--shadow-sm);
         }
 
         .avatar-wrapper:hover {
-            transform: translateY(-2px);
+            transform: scale(1.04);
+            box-shadow: var(--shadow-md);
         }
 
         .username {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-dark);
+            letter-spacing: 1px;
         }
 
         .invite-code {
             font-size: 12px;
-            color: var(--color-gray-500);
+            color: var(--color-gray-400);
             margin-top: 6px;
+            letter-spacing: 0.5px;
         }
 
         .balance-card {
-            position: relative;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 240, 232, 0.96));
-            border-radius: 24px;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+            border-radius: var(--radius-lg);
             padding: 24px;
-            box-shadow: var(--shadow-lg);
+            position: relative;
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            box-shadow: var(--shadow-gold);
             overflow: hidden;
-            margin-bottom: 20px;
         }
 
         .balance-card::before {
             content: '';
             position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 50%);
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
             border-radius: 50%;
         }
 
         .balance-card:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
         }
 
         .piggy-bank {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-bottom: 16px;
-            box-shadow: 0 10px 20px rgba(196, 30, 58, 0.18);
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 40px;
+            opacity: 0.9;
         }
 
         .balance-label {
-            font-size: 12px;
-            color: var(--color-gray-500);
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .balance-amount {
-            font-size: 28px;
+            font-size: 34px;
             font-weight: 700;
-            color: var(--color-dark);
+            color: white;
+            margin-top: 8px;
+            font-family: 'Noto Serif SC', serif;
         }
 
         .today-profit {
-            margin-top: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--color-gray-600);
-            font-size: 13px;
         }
 
         .profit-value {
-            font-weight: 700;
-            color: var(--color-primary);
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
         }
 
         .nav-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 8px;
+            margin-bottom: 24px;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 14px 0;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 16px;
-            font-size: 13px;
+            padding: 9px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-md);
+            background: transparent;
             color: var(--color-gray-600);
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            transition: all 0.2s var(--ease-out);
+            letter-spacing: 0.5px;
         }
 
         .tab-btn.active {
-            color: var(--color-dark);
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.14), rgba(212, 175, 55, 0.14));
-            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.14);
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(196, 30, 58, 0.25);
         }
 
         .tab-btn:hover:not(.active) {
-            transform: translateY(-1px);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
         }
 
         /* 盈利统计卡片 */
         .profit-summary {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
+            display: none;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFF8E7, #FFF5D6);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: var(--shadow-sm);
         }
 
         .profit-summary.active {
-            display: grid;
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .profit-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
 
         .profit-title {
             font-size: 14px;
-            font-weight: 700;
-            color: var(--color-dark);
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .profit-icon {
-            font-size: 18px;
+            font-size: 24px;
+            opacity: 0.8;
         }
 
         .profit-value-large {
-            font-size: 22px;
+            font-size: 32px;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-lucky-green);
+            font-family: 'Noto Serif SC', serif;
+            text-shadow: 0 2px 4px rgba(107, 203, 119, 0.2);
         }
 
         .profit-trend {
-            font-size: 12px;
-            color: var(--color-gray-600);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .trend-up {
-            color: var(--color-primary);
+            color: var(--color-lucky-green);
+            font-weight: 600;
         }
 
         .coin-chart {
             display: flex;
+            justify-content: space-around;
             align-items: flex-end;
-            gap: 6px;
-            margin-top: 12px;
+            height: 200px;
+            padding: 20px 0;
         }
 
         .coin-stack {
-            width: 20px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
             align-items: center;
+            gap: 8px;
         }
 
         .stack-coins {
-            width: 100%;
-            height: 18px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.5), rgba(255, 204, 153, 0.5));
-            animation: dropIn 0.8s ease;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 2px;
         }
 
         .coin {
-            width: 100%;
-            height: 10px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 234, 0, 0.95));
+            font-size: 16px;
+            animation: dropIn 0.5s ease-out;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .coin:hover {
-            opacity: 0.9;
+            transform: scale(1.2);
         }
 
         @keyframes dropIn {
-            from { transform: translateY(-6px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .stack-label {
-            font-size: 10px;
-            color: var(--color-gray-500);
+            font-size: 12px;
+            color: var(--text-secondary);
         }
 
         .btn-logout {
             width: 100%;
-            padding: 16px 0;
-            border: none;
-            border-radius: 16px;
-            background: rgba(196, 30, 58, 0.1);
+            padding: 13px;
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            background: transparent;
             color: var(--color-primary);
-            font-weight: 700;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: background 0.2s ease;
-            margin-top: 10px;
+            transition: all 0.2s var(--ease-out);
+            margin-top: 24px;
         }
 
         .btn-logout:hover {
-            background: rgba(196, 30, 58, 0.18);
+            background: var(--color-primary);
+            color: white;
         }
 
         /* ========== 底部导航栏 ========== */
         .bottom-nav {
             position: fixed;
-            left: 0;
-            right: 0;
             bottom: 0;
-            height: 74px;
-            background: var(--color-card);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.06);
+            padding: 6px 0; /* 减小上下内边距 */
+            z-index: 1000;
+            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            color: var(--color-gray-500);
-            font-size: 11px;
+            gap: 2px; /* 减小图标与文字的间距 */
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: all 0.2s var(--ease-out);
+            padding: 4px 16px; /* 减小内边距 */
+            border-radius: var(--radius-sm);
         }
 
         .nav-item:hover {
-            color: var(--color-primary);
+            background: rgba(196, 30, 58, 0.05);
         }
 
         .nav-item.active .nav-icon {
             color: var(--color-primary);
+            transform: scale(1.1);
         }
 
         .nav-item.active .nav-label {
             color: var(--color-primary);
+            font-weight: 600;
         }
 
         .nav-icon {
-            font-size: 20px;
+            font-size: 20px; /* 稍微减小图标 */
+            transition: all 0.2s var(--ease-out);
+            color: var(--color-gray-600);
         }
 
         .nav-label {
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 10px; /* 稍微减小文字 */
+            font-weight: 500;
+            color: var(--color-gray-600);
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
         }
 
         /* 提示弹窗 */
         .toast {
             position: fixed;
-            bottom: 100px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(0, 0, 0, 0.75);
             color: white;
-            padding: 12px 18px;
-            border-radius: 999px;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2000;
+            transition: all 0.25s var(--ease-out);
+            pointer-events: none;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 100;
+            letter-spacing: 0.5px;
         }
 
         .toast.show {
+            transform: translate(-50%, -50%) scale(1);
             opacity: 1;
-            visibility: visible;
         }
     </style>
 </head>
@@ -1491,217 +1679,731 @@
         <!-- 登录页 -->
         <div class="page login-page active" id="page-login">
             <div class="logo-section">
-                <div class="caishen-logo">财神</div>
-                <div class="brand-title">日进斗金</div>
-                <div class="brand-subtitle">高端国潮AI预测体验</div>
+                <div class="caishen-logo">金</div>
+                <h1 class="brand-title">日进斗金</h1>
+                <p class="brand-subtitle">财运亨通 · 天天盈利</p>
             </div>
-            <div class="input-card">
-                <span class="input-icon">📱</span>
-                <input type="text" id="login-account" placeholder="手机号 / 账号">
+
+            <div class="input-card" onclick="document.getElementById('username').focus()">
+                <span class="input-icon">👤</span>
+                <input type="text" id="username" placeholder="请输入账户名">
             </div>
-            <div class="input-card">
-                <span class="input-icon">🔒</span>
-                <input type="password" id="login-password" placeholder="密码">
+
+            <div class="input-card" onclick="document.getElementById('password').focus()">
+                <span class="input-icon">🔐</span>
+                <input type="password" id="password" placeholder="请输入密码">
             </div>
-            <button class="btn-login" onclick="handleLogin()">登录</button>
-            <div class="register-hint">
-                还没有账号？<span class="register-link" onclick="switchPage('register')">立即注册</span>
-            </div>
+
+            <button class="btn-login" onclick="handleLogin()">
+                立即登录
+            </button>
+
+            <p class="register-hint">
+                还没有账号？
+                <span class="register-link" onclick="switchPage('register')">立即注册</span>
+            </p>
         </div>
 
         <!-- 注册页 -->
         <div class="page login-page" id="page-register">
             <div class="logo-section">
-                <div class="caishen-logo">🧧</div>
-                <div class="brand-title">注册账户</div>
-                <div class="brand-subtitle">开启国潮AI财富预测之旅</div>
+                <div class="caishen-logo">金</div>
+                <h1 class="brand-title">日进斗金</h1>
+                <p class="brand-subtitle">创建账号 · 开启财富之旅</p>
             </div>
-            <div class="input-card">
+
+            <div class="input-card" onclick="document.getElementById('reg-username').focus()">
                 <span class="input-icon">👤</span>
-                <input type="text" id="register-name" placeholder="昵称">
+                <input type="text" id="reg-username" placeholder="请输入账户名">
             </div>
-            <div class="input-card">
-                <span class="input-icon">📱</span>
-                <input type="text" id="register-account" placeholder="手机号 / 账号">
+
+            <div class="input-card" onclick="document.getElementById('reg-password').focus()">
+                <span class="input-icon">🔐</span>
+                <input type="password" id="reg-password" placeholder="请输入密码">
             </div>
-            <div class="input-card">
-                <span class="input-icon">🔒</span>
-                <input type="password" id="register-password" placeholder="设置密码">
+
+            <div class="input-card" onclick="document.getElementById('reg-confirm').focus()">
+                <span class="input-icon">🔐</span>
+                <input type="password" id="reg-confirm" placeholder="请确认密码">
             </div>
-            <button class="btn-login" onclick="handleRegister()">注册</button>
-            <div class="register-hint">
-                已有账号？<span class="register-link" onclick="switchPage('login')">返回登录</span>
+
+            <div class="input-card" onclick="document.getElementById('reg-invite').focus()">
+                <span class="input-icon">🎟️</span>
+                <input type="text" id="reg-invite" placeholder="请输入邀请码">
             </div>
+
+            <button class="btn-login" onclick="handleRegister()">
+                立即注册
+            </button>
+
+            <p class="register-hint">
+                已有账号？
+                <span class="register-link" onclick="switchPage('login')">返回登录</span>
+            </p>
         </div>
 
         <!-- AI预测页 -->
         <div class="page ai-page" id="page-ai">
+            <!-- 卡通观众席背景 -->
+            <div class="cartoon-audience">
+                <div class="audience-row row-1">
+                    <span class="animal"></span>
+                    <span class="animal">🐰</span>
+                    <span class="animal">🐱</span>
+                    <span class="animal">🐶</span>
+                    <span class="animal"></span>
+                    <span class="animal">🐵</span>
+                    <span class="animal">🐯</span>
+                    <span class="animal"></span>
+                </div>
+            </div>
+
+            <!-- 顶部标题区域 -->
             <div class="ai-hero-section">
-                <div class="taiji-bg"></div>
-                <div class="ai-hero-title">AI财富预测</div>
-                <div class="ai-hero-subtitle">实时监测趋势，洞察未来。让国潮与财富预测在指尖相遇。</div>
+                <h2 class="ai-hero-title">智能数据分析</h2>
+                <p class="ai-hero-subtitle">基于AI算法的开奖趋势分析系统</p>
             </div>
-            <div class="cartoon-audience"></div>
-            <div class="crystal-ball-container">
-                <div class="crystal-ball" onclick="toggleAI()">✨</div>
-                <div class="ai-status" id="ai-status-text">点击水晶球，开启AI预测</div>
+
+            <!-- 跑道动画(移到placeholder外面,避免被整体隐藏) -->
+            <div class="race-track" id="race-track">
+                <div class="track-lanes">
+                    <div class="lane lane-1"><span class="runner runner-1 character-sprite sprite-nn"></span></div>
+                    <div class="lane lane-2"><span class="runner runner-2 character-sprite sprite-mm"></span></div>
+                    <div class="lane lane-3"><span class="runner runner-3 character-sprite sprite-bb"></span></div>
+                    <div class="lane lane-4"><span class="runner runner-4 character-sprite sprite-qq"></span></div>
+                    <div class="lane lane-5"><span class="runner runner-5 character-sprite sprite-tt"></span></div>
+                    <div class="lane lane-6"><span class="runner runner-6 character-sprite sprite-dd"></span></div>
+                    <div class="lane lane-7"><span class="runner runner-7 character-sprite sprite-dy"></span></div>
+                    <div class="lane lane-8"><span class="runner runner-8 character-sprite sprite-ff"></span></div>
+                </div>
             </div>
+
+            <!-- AI未启动时的占位界面 -->
             <div class="ai-placeholder" id="ai-placeholder">
-                <div class="ai-brain-animation">
-                    <div class="brain-core"></div>
-                    <div class="brain-ring ring-1"></div>
-                    <div class="brain-ring ring-2"></div>
-                    <div class="brain-ring ring-3"></div>
-                    <div class="brain-particles">
-                        <div class="particle p1">⚡</div>
-                        <div class="particle p2">✨</div>
-                        <div class="particle p3">💫</div>
-                        <div class="particle p4">🔥</div>
-                    </div>
-                </div>
-                <div class="bagua-container">
-                    <div class="bagua-ring">
-                        <div class="gua-symbol">乾</div>
-                        <div class="gua-symbol">坤</div>
-                        <div class="gua-symbol">震</div>
-                        <div class="gua-symbol">巽</div>
-                        <div class="gua-symbol">坎</div>
-                        <div class="gua-symbol">离</div>
-                        <div class="gua-symbol">艮</div>
-                        <div class="gua-symbol">兑</div>
-                    </div>
-                    <div class="core-circle"><span class="core-text">赢</span></div>
-                </div>
+                <!-- 8个生肖冠军头像 -->
                 <div class="champion-avatars">
-                    <div class="avatar-item avatar-1"><div class="avatar-circle character-sprite sprite-nn"></div><div class="trophy-count">3</div></div>
-                    <div class="avatar-item avatar-2"><div class="avatar-circle character-sprite sprite-mm"></div><div class="trophy-count">5</div></div>
-                    <div class="avatar-item avatar-3"><div class="avatar-circle character-sprite sprite-bb"></div><div class="trophy-count">8</div></div>
-                    <div class="avatar-item avatar-4"><div class="avatar-circle character-sprite sprite-qq"></div><div class="trophy-count">2</div></div>
-                    <div class="avatar-item avatar-5"><div class="avatar-circle character-sprite sprite-tt"></div><div class="trophy-count">7</div></div>
-                    <div class="avatar-item avatar-6"><div class="avatar-circle character-sprite sprite-dd"></div><div class="trophy-count">4</div></div>
-                    <div class="avatar-item avatar-7"><div class="avatar-circle character-sprite sprite-dy"></div><div class="trophy-count">6</div></div>
-                    <div class="avatar-item avatar-8"><div class="avatar-circle character-sprite sprite-ff"></div><div class="trophy-count">1</div></div>
+                    <div class="avatar-item avatar-1">
+                        <div class="avatar-circle character-sprite sprite-nn"></div>
+                        <div class="trophy-count">1</div>
+                    </div>
+                    <div class="avatar-item avatar-2">
+                        <div class="avatar-circle character-sprite sprite-mm"></div>
+                        <div class="trophy-count">2</div>
+                    </div>
+                    <div class="avatar-item avatar-3">
+                        <div class="avatar-circle character-sprite sprite-bb"></div>
+                        <div class="trophy-count">3</div>
+                    </div>
+                    <div class="avatar-item avatar-4">
+                        <div class="avatar-circle character-sprite sprite-qq"></div>
+                        <div class="trophy-count">4</div>
+                    </div>
+                    <div class="avatar-item avatar-5">
+                        <div class="avatar-circle character-sprite sprite-tt"></div>
+                        <div class="trophy-count">5</div>
+                    </div>
+                    <div class="avatar-item avatar-6">
+                        <div class="avatar-circle character-sprite sprite-dd"></div>
+                        <div class="trophy-count">6</div>
+                    </div>
+                    <div class="avatar-item avatar-7">
+                        <div class="avatar-circle character-sprite sprite-dy"></div>
+                        <div class="trophy-count">7</div>
+                    </div>
+                    <div class="avatar-item avatar-8">
+                        <div class="avatar-circle character-sprite sprite-ff"></div>
+                        <div class="trophy-count">8</div>
+                    </div>
                 </div>
-                <div class="race-track" id="race-track">
-                    <div class="finish-line"></div>
-                    <div class="track-lanes">
-                        <div class="lane"><div class="runner runner-1 character-sprite sprite-nn"></div></div>
-                        <div class="lane"><div class="runner runner-2 character-sprite sprite-mm"></div></div>
-                        <div class="lane"><div class="runner runner-3 character-sprite sprite-bb"></div></div>
-                        <div class="lane"><div class="runner runner-4 character-sprite sprite-qq"></div></div>
-                        <div class="lane"><div class="runner runner-5 character-sprite sprite-tt"></div></div>
-                        <div class="lane"><div class="runner runner-6 character-sprite sprite-dd"></div></div>
-                        <div class="lane"><div class="runner runner-7 character-sprite sprite-dy"></div></div>
-                        <div class="lane"><div class="runner runner-8 character-sprite sprite-ff"></div></div>
+                
+                <!-- AI数据分析加载动画 -->
+                <div class="ai-analysis-loading" id="ai-analysis-loading">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring ring-1"></div>
+                        <div class="spinner-ring ring-2"></div>
+                        <div class="spinner-ring ring-3"></div>
+                        <div class="loading-text">AI正在分析历史数据...</div>
+                    </div>
+                    <div class="analysis-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="progress-text" id="progress-text">0%</div>
+                    </div>
+                    <div class="analysis-steps" id="analysis-steps">
+                        <div class="step step-1 active">✓ 连接数据库</div>
+                        <div class="step step-2">○ 读取历史记录</div>
+                        <div class="step step-3">○ 运行算法模型</div>
+                        <div class="step step-4">○ 生成预测结果</div>
+                    </div>
+                </div>
+                
+                <h3 class="ai-waiting-title" id="waiting-title">AI智能引擎待命</h3>
+                <p class="ai-waiting-desc" id="waiting-desc">点击下方按钮启动数据分析系统</p>
+                
+                <!-- 数据流效果 -->
+                <div class="data-stream">
+                    <span class="stream-item">01</span>
+                    <span class="stream-item">08</span>
+                    <span class="stream-item">03</span>
+                    <span class="stream-item">06</span>
+                    <span class="stream-item">02</span>
+                    <span class="stream-item">07</span>
+                    <span class="stream-item">04</span>
+                    <span class="stream-item">05</span>
+                </div>
+                <div class="ai-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span class="feature-text">精准预测</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span class="feature-text">毫秒响应</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💰</span>
+                        <span class="feature-text">智能策略</span>
                     </div>
                 </div>
             </div>
-            <div class="ai-analysis-loading" id="analysis-loading">
-                <div class="loading-spinner">
-                    <div class="spinner-ring">
-                        <div class="ring-1"></div>
-                        <div class="ring-2"></div>
-                        <div class="ring-3"></div>
+
+            <!-- AI启动后显示的历史记录(初始隐藏) -->
+            <div class="history-scroll" id="ai-history" style="display: none;">
+                <!-- 数据分析提示 -->
+                <div class="analysis-hint" id="analysis-hint">
+                    <span class="hint-icon"></span>
+                    <span class="hint-text">AI正在分析历史数据...</span>
+                </div>
+                
+                <!-- 历史记录内容容器 - 用于跑马灯动画 -->
+                <div class="history-content">
+                    <!-- 内部滚动容器 - 实际执行动画的元素 -->
+                    <div class="history-inner">
+                        <!-- 原始数据 -->
+                        <div class="history-item">
+                            <span class="period-text">20260705-003期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="period-text">20260705-002期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="period-text">20260705-001期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 复制一份数据实现无缝循环 -->
+                        <div class="history-item">
+                            <span class="period-text">20260705-003期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="period-text">20260705-002期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="period-text">20260705-001期</span>
+                            <div class="zodiac-balls">
+                                <span class="zodiac-ball" onclick="showBallDetail('1')">1</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('2')">2</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('3')">3</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('4')">4</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('5')">5</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('6')">6</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('7')">7</span>
+                                <span class="zodiac-ball" onclick="showBallDetail('8')">8</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="loading-text">AI 正在分析最新数据，请稍候...</div>
-                <div class="analysis-progress"><div class="progress-fill" id="progress-fill"></div></div>
-                <div class="progress-text" id="progress-text">0%</div>
-                <div class="analysis-steps">
-                    <div class="step" id="step-1"></div>
-                    <div class="step" id="step-2"></div>
-                    <div class="step" id="step-3"></div>
-                </div>
             </div>
-            <div class="data-stream" id="data-stream">
-                <div class="stream-item">AI算力 98%</div>
-                <div class="stream-item">预测精度 94%</div>
-                <div class="stream-item">趋势指数 +8.6</div>
-                <div class="stream-item">连胜时长 12</div>
-                <div class="stream-item">分析次数 468</div>
-                <div class="stream-item">风险评估 低</div>
-                <div class="stream-item">热点区间 03-09</div>
-                <div class="stream-item">资金流向 强</div>
+
+            <div class="ai-action-section">
+                <button class="btn-start-money" id="btn-start" onclick="startAI()">
+                    启动AI预测
+                </button>
+                <p class="launch-hint">智能分析开奖数据，辅助决策参考</p>
             </div>
-            <div class="ai-waiting-title">财富风向已就绪</div>
-            <div class="ai-waiting-desc">点击水晶球或上方按钮开始预测，系统将自动为你匹配最优方案。</div>
-            <div class="ai-features">
-                <div class="feature-item"><div class="feature-icon">🧠</div><div class="feature-text">智能预测</div></div>
-                <div class="feature-item"><div class="feature-icon">🎯</div><div class="feature-text">精准命中</div></div>
-                <div class="feature-item"><div class="feature-icon">🌊</div><div class="feature-text">实时趋势</div></div>
-            </div>
-            <div class="history-scroll">
-                <div class="analysis-hint"><span class="hint-icon">📈</span><span class="hint-text">近期爆款预测已上线，点击历史记录查看更多。</span></div>
-                <div class="history-inner">
-                    <div class="history-item"><div class="period-text">第 2026 期</div><div>号码: 03 / 08 / 16 / 21 / 33 / 42</div></div>
-                    <div class="history-item"><div class="period-text">第 2025 期</div><div>号码: 01 / 05 / 17 / 24 / 30 / 39</div></div>
-                    <div class="history-item"><div class="period-text">第 2024 期</div><div>号码: 02 / 07 / 19 / 22 / 31 / 40</div></div>
-                    <div class="history-item"><div class="period-text">第 2023 期</div><div>号码: 04 / 10 / 15 / 26 / 34 / 43</div></div>
-                </div>
-            </div>
-            <button class="btn-start-money" onclick="startAI()">开始赚钱</button>
-            <div class="launch-hint">AI预测支持一键切换，当前保留为页面演示效果。</div>
-            <div class="ai-action-section"></div>
         </div>
 
         <!-- 游戏中心页 -->
         <div class="page games-page" id="page-games">
             <div class="countdown-card">
-                <div class="sandglass-icon">⏳</div>
-                <div class="countdown-label">下次开奖倒计时</div>
+                <div class="sandglass-icon">⏱</div>
+                <div class="countdown-label">距离下期开奖</div>
                 <div class="countdown-timer">
-                    <div class="time-group"><div class="flip-digit" id="countdown-min">05</div><div class="time-unit">分钟</div></div>
-                    <div class="time-group"><div class="flip-digit" id="countdown-sec">23</div><div class="time-unit">秒</div></div>
+                    <div class="time-group">
+                        <div class="flip-digit" id="hours-0">0</div>
+                        <div class="flip-digit" id="hours-1">0</div>
+                        <span class="time-unit">时</span>
+                    </div>
+                    <div class="time-group">
+                        <div class="flip-digit" id="minutes-0">0</div>
+                        <div class="flip-digit" id="minutes-1">5</div>
+                        <span class="time-unit">分</span>
+                    </div>
+                    <div class="time-group">
+                        <div class="flip-digit" id="seconds-0">2</div>
+                        <div class="flip-digit" id="seconds-1">3</div>
+                        <span class="time-unit">秒</span>
+                    </div>
                 </div>
             </div>
-            <div class="section-title">历史开奖</div>
+
+            <h3 class="section-title">📜 开奖记录</h3>
             <div class="history-list">
-                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-15</div><div class="card-date">#2026-072</div></div><div>开奖号码：01 08 19 24 35 46</div></div>
-                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-14</div><div class="card-date">#2026-071</div></div><div>开奖号码：02 11 23 29 37 45</div></div>
-                <div class="history-card"><div class="card-header"><div class="card-period">2026-07-13</div><div class="card-date">#2026-070</div></div><div>开奖号码：03 12 21 30 34 44</div></div>
+                <div class="history-card" onclick="showHistoryDetail('20260705-005')">
+                    <div class="card-header">
+                        <span class="card-period">20260705-005期</span>
+                        <span class="card-date">07-05 14:30</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">8</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260705-004')">
+                    <div class="card-header">
+                        <span class="card-period">20260705-004期</span>
+                        <span class="card-date">07-05 14:25</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">8</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260705-003')">
+                    <div class="card-header">
+                        <span class="card-period">20260705-003期</span>
+                        <span class="card-date">07-05 14:20</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">2</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260705-001')">
+                    <div class="card-header">
+                        <span class="card-period">20260705-001期</span>
+                        <span class="card-date">07-05 14:05</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">8</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260705-000')">
+                    <div class="card-header">
+                        <span class="card-period">20260705-000期</span>
+                        <span class="card-date">07-05 14:00</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-299')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-299期</span>
+                        <span class="card-date">07-04 23:55</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">3</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-298')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-298期</span>
+                        <span class="card-date">07-04 23:50</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">6</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-297')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-297期</span>
+                        <span class="card-date">07-04 23:45</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">1</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-296')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-296期</span>
+                        <span class="card-date">07-04 23:40</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">8</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-295')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-295期</span>
+                        <span class="card-date">07-04 23:35</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-294')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-294期</span>
+                        <span class="card-date">07-04 23:30</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">2</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-293')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-293期</span>
+                        <span class="card-date">07-04 23:25</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-292')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-292期</span>
+                        <span class="card-date">07-04 23:20</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-291')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-291期</span>
+                        <span class="card-date">07-04 23:15</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">2</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-290')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-290期</span>
+                        <span class="card-date">07-04 23:10</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-289')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-289期</span>
+                        <span class="card-date">07-04 23:05</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">3</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-288')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-288期</span>
+                        <span class="card-date">07-04 23:00</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">8</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-287')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-287期</span>
+                        <span class="card-date">07-04 22:55</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-286')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-286期</span>
+                        <span class="card-date">07-04 22:50</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">7</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">2</span>
+                    </div>
+                </div>
+                <div class="history-card" onclick="showHistoryDetail('20260704-285')">
+                    <div class="card-header">
+                        <span class="card-period">20260704-285期</span>
+                        <span class="card-date">07-04 22:45</span>
+                    </div>
+                    <div class="zodiac-balls">
+                        <span class="zodiac-ball">6</span>
+                        <span class="zodiac-ball">8</span>
+                        <span class="zodiac-ball">4</span>
+                        <span class="zodiac-ball">2</span>
+                        <span class="zodiac-ball">1</span>
+                        <span class="zodiac-ball">3</span>
+                        <span class="zodiac-ball">5</span>
+                        <span class="zodiac-ball">7</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 个人中心页 -->
         <div class="page profile-page" id="page-profile">
             <div class="identity-section">
-                <div class="avatar-wrapper"><span style="font-size: 28px;">👑</span></div>
-                <div>
-                    <div class="username">VIP用户</div>
-                    <div class="invite-code">邀请码：RJ2026</div>
+                <div class="avatar-wrapper" onclick="showToast('头像上传功能开发中...')">
+                    张
+                </div>
+                <h2 class="username">张三</h2>
+                <p class="invite-code">邀请码: ABC123</p>
+            </div>
+
+            <div class="balance-card" onclick="showToast('余额详情')">
+                <div class="piggy-bank">💼</div>
+                <div class="balance-label">我的余额</div>
+                <div class="balance-amount">¥12,580.00</div>
+                <div class="today-profit">
+                    <span>今日盈利</span>
+                    <span class="profit-value">+¥580.00</span>
                 </div>
             </div>
-            <div class="balance-card">
-                <div class="piggy-bank">🐷</div>
-                <div class="balance-label">今日收益</div>
-                <div class="balance-amount">+1,280</div>
-                <div class="today-profit">今日趋势：<span class="profit-value">+12.8%</span></div>
-            </div>
+
             <div class="nav-tabs">
-                <button class="tab-btn active" onclick="switchTab(this, 'daily')">日</button>
-                <button class="tab-btn" onclick="switchTab(this, 'weekly')">周</button>
-                <button class="tab-btn" onclick="switchTab(this, 'monthly')">月</button>
+                <button class="tab-btn active" onclick="switchTab(this, 'yesterday')">昨日</button>
+                <button class="tab-btn" onclick="switchTab(this, 'week')">本周</button>
+                <button class="tab-btn" onclick="switchTab(this, 'month')">本月</button>
             </div>
-            <div class="profit-summary active">
-                <div>
-                    <div class="profit-header"><span class="profit-title">总收益</span><span class="profit-icon">💰</span></div>
-                    <div class="profit-value-large">18,920</div>
-                    <div class="profit-trend trend-up">+18.9%</div>
+
+            <!-- 昨日盈利 -->
+            <div class="profit-summary active" id="profit-yesterday">
+                <div class="profit-header">
+                    <span class="profit-title">昨日盈利总额</span>
+                    <span class="profit-icon">📊</span>
                 </div>
-                <div>
-                    <div class="profit-header"><span class="profit-title">本月收益</span><span class="profit-icon">📈</span></div>
-                    <div class="profit-value-large">5,420</div>
-                    <div class="profit-trend trend-up">+10.4%</div>
+                <div class="profit-value-large">+¥2,380.00</div>
+                <div class="profit-trend">
+                    <span class="trend-up">↑ 18.5%</span>
+                    <span>较前日增长</span>
                 </div>
             </div>
+
+            <!-- 本周盈利 -->
+            <div class="profit-summary" id="profit-week">
+                <div class="profit-header">
+                    <span class="profit-title">本周盈利总额</span>
+                    <span class="profit-icon">📈</span>
+                </div>
+                <div class="profit-value-large">+¥12,580.00</div>
+                <div class="profit-trend">
+                    <span class="trend-up">↑ 24.3%</span>
+                    <span>较上周增长</span>
+                </div>
+            </div>
+
+            <!-- 本月盈利 -->
+            <div class="profit-summary" id="profit-month">
+                <div class="profit-header">
+                    <span class="profit-title">本月盈利总额</span>
+                    <span class="profit-icon"></span>
+                </div>
+                <div class="profit-value-large">+¥48,960.00</div>
+                <div class="profit-trend">
+                    <span class="trend-up">↑ 32.8%</span>
+                    <span>较上月增长</span>
+                </div>
+            </div>
+
             <button class="btn-logout" onclick="handleLogout()">退出登录</button>
         </div>
 
         <!-- 底部导航栏 -->
         <div class="bottom-nav">
-            <div class="nav-item active" onclick="switchPage('ai')"><div class="nav-icon">🏠</div><div class="nav-label">预测</div></div>
-            <div class="nav-item" onclick="switchPage('games')"><div class="nav-icon">🎮</div><div class="nav-label">游戏</div></div>
-            <div class="nav-item" onclick="switchPage('profile')"><div class="nav-icon">👤</div><div class="nav-label">我的</div></div>
+            <div class="nav-item active" onclick="switchPage('ai')" data-page="ai">
+                <span class="nav-icon">◈</span>
+                <span class="nav-label">AI预测</span>
+            </div>
+            <div class="nav-item" onclick="switchPage('games')" data-page="games">
+                <span class="nav-icon">▣</span>
+                <span class="nav-label">游戏</span>
+            </div>
+            <div class="nav-item" onclick="switchPage('profile')" data-page="profile">
+                <span class="nav-icon">◉</span>
+                <span class="nav-label">我的</span>
+            </div>
         </div>
 
         <!-- Toast提示 -->
@@ -1711,34 +2413,94 @@
     <script>
         // 页面切换
         function switchPage(pageName) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.getElementById(`page-${pageName}`).classList.add('active');
-            document.querySelector(`.nav-item[onclick="switchPage('${pageName}')"]`)?.classList.add('active');
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 显示目标页面
+            const targetPage = document.getElementById(`page-${pageName}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // 更新导航栏状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.page === pageName) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // 切换到AI页时启动数据流动态变化,离开时停止
+            if (pageName === 'ai') {
+                startDataStream();
+            } else {
+                stopDataStream();
+            }
         }
 
         // 登录处理
         function handleLogin() {
-            showToast('登录成功，欢迎回来！');
-            switchPage('ai');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showToast('请输入账号和密码');
+                return;
+            }
+            
+            showToast('登录成功!');
+            setTimeout(() => {
+                switchPage('ai');
+            }, 1000);
         }
 
         // 注册处理
         function handleRegister() {
-            showToast('注册成功，正在为您准备未来财富预测。');
-            switchPage('ai');
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
+            const invite = document.getElementById('reg-invite').value;
+            
+            if (!username || !password || !confirm || !invite) {
+                showToast('请填写所有字段');
+                return;
+            }
+            if (password !== confirm) {
+                showToast('两次密码输入不一致');
+                return;
+            }
+            if (password.length < 6) {
+                showToast('密码长度不能少于6位');
+                return;
+            }
+            
+            showToast('注册成功!');
+            setTimeout(() => {
+                switchPage('login');
+            }, 1000);
         }
 
         // AI预测开关
         let isAICalculating = false;
         function toggleAI() {
+            isAICalculating = !isAICalculating;
+            const statusEl = document.getElementById('ai-status');
+            const crystalBall = document.querySelector('.crystal-ball');
+            
             if (isAICalculating) {
-                stopAI();
+                statusEl.textContent = 'AI智能预测中...';
+                crystalBall.style.animation = 'pulse 1s infinite';
+                showToast('AI预测已启动');
             } else {
-                startAI();
+                statusEl.textContent = '点击水晶球启动AI预测';
+                crystalBall.style.animation = 'pulse 2s infinite';
+                showToast('AI预测已停止');
             }
         }
 
+        // 数据流数字随机变动
         let dataStreamInterval = null;
         let analysisInterval = null; // 进度条定时器
         let analysisTimeout = null; // 跑道→分析切换定时器
@@ -1746,115 +2508,372 @@
         let isAnalysisRunning = false; // 分析运行状态标志
         
         function randomizeDataStream() {
-            const dataItems = Array.from(document.querySelectorAll('.stream-item'));
-            dataItems.forEach(item => {
-                const values = ['98%', '94%', '+8.6', '12', '468', '低', '03-09', '强'];
-                item.textContent = values[Math.floor(Math.random() * values.length)];
+            const streamItems = document.querySelectorAll('.stream-item');
+            if (!streamItems || streamItems.length === 0) return;
+            
+            // 生成1-8的随机排列(不重复)
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+            shuffleArray(numbers);
+            
+            // 更新每个数字并添加动画效果
+            streamItems.forEach((item, index) => {
+                // 添加变化动画类
                 item.classList.add('changing');
-                setTimeout(() => item.classList.remove('changing'), 600);
+                
+                // 延迟一下再更新数字,让动画先播放
+                setTimeout(() => {
+                    item.textContent = String(numbers[index]).padStart(2, '0');
+                }, 150);
+                
+                // 移除动画类
+                setTimeout(() => {
+                    item.classList.remove('changing');
+                }, 300);
             });
         }
         
+        // Fisher-Yates洗牌算法
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
-            return array;
         }
         
+        // 开始数据流随机变动
         function startDataStream() {
-            if (dataStreamInterval) return;
-            dataStreamInterval = setInterval(randomizeDataStream, 2200);
+            if (dataStreamInterval) return; // 防止重复启动
+            
+            // 立即执行一次
+            randomizeDataStream();
+            
+            // 每2.5秒更新一次
+            dataStreamInterval = setInterval(randomizeDataStream, 2500);
         }
         
+        // 停止数据流随机变动
         function stopDataStream() {
-            clearInterval(dataStreamInterval);
-            dataStreamInterval = null;
+            if (dataStreamInterval) {
+                clearInterval(dataStreamInterval);
+                dataStreamInterval = null;
+            }
         }
 
+        // 开始赚钱
         function startAI() {
-            if (isAICalculating) return;
-            isAICalculating = true;
-            showToast('AI预测启动中，请稍候...');
-            document.getElementById('ai-status-text').textContent = 'AI正在计算，请稍候...';
-            document.getElementById('race-track').classList.add('active');
-            document.getElementById('analysis-loading').classList.remove('active');
+            const btn = document.getElementById('btn-start');
+            const placeholder = document.getElementById('ai-placeholder');
+            const waitingTitle = document.getElementById('waiting-title');
+            const waitingDesc = document.getElementById('waiting-desc');
+            const raceTrack = document.getElementById('race-track');
+            const analysisLoading = document.getElementById('ai-analysis-loading');
+            const history = document.getElementById('ai-history');
+            const hint = document.getElementById('analysis-hint');
+            
+            // 启动数据流随机变动效果
             startDataStream();
-
+            
+            // 隐藏初始化界面(包括8个生肖头像、跑道、数据流、特性图标等)
+            if (placeholder) {
+                placeholder.style.display = 'none';
+            }
+            
+            // 隐藏标题和描述
+            if (waitingTitle) waitingTitle.style.display = 'none';
+            if (waitingDesc) waitingDesc.style.display = 'none';
+            
+            // 显示跑道动画
+            if (raceTrack) {
+                raceTrack.classList.add('active');
+                
+                // 为8个跑道角色设置随机的animation-duration,实现随机名次
+                const runners = document.querySelectorAll('.runner');
+                runners.forEach((runner, index) => {
+                    // 生成2.5s - 3.5s之间的随机时间
+                    const randomDuration = 2.5 + Math.random() * 1.0;
+                    runner.style.animationDuration = randomDuration + 's';
+                });
+            }
+            
+            btn.disabled = false; // 保持按钮可点击,让用户可以随时停止
+            btn.innerHTML = '<span></span><span>停止AI预测</span>';
+            btn.onclick = stopAI; // 立即绑定停止功能
+            showToast('开始AI智能分析!');
+            isAnalysisRunning = true;
+            
+            // 3秒后显示AI分析加载动画
             analysisTimeout = setTimeout(() => {
-                document.getElementById('analysis-loading').classList.add('active');
-                document.getElementById('progress-text').textContent = '0%';
+                if (!isAnalysisRunning) return; // 已停止则不执行
+                if (raceTrack) {
+                    raceTrack.classList.remove('active');
+                    raceTrack.style.display = 'none';
+                }
+                if (analysisLoading) {
+                    analysisLoading.style.display = ''; // 清除停止时设置的内联display:none
+                    analysisLoading.classList.add('active');
+                }
+                
+                // 显示历史记录区域(使用跑马灯循环滚动)
+                if (history) {
+                    history.style.display = 'block';
+                    // 不需要手动滚动,由CSS动画自动处理
+                }
+                
+                // 恢复数据分析提示的显示(清除停止时设置的内联display:none)
+                if (hint) {
+                    hint.style.display = '';
+                }
+                
+                // 模拟进度条和步骤更新
                 let progress = 0;
-
+                const progressFill = document.getElementById('progress-fill');
+                const progressText = document.getElementById('progress-text');
+                const steps = document.querySelectorAll('.step');
+                
                 analysisInterval = setInterval(() => {
-                    progress += 8;
-                    document.getElementById('progress-fill').style.width = `${progress}%`;
-                    document.getElementById('progress-text').textContent = `${progress}%`;
+                    progress += Math.random() * 15;
+                    if (progress > 100) progress = 100;
+                    
+                    if (progressFill) progressFill.style.width = progress + '%';
+                    if (progressText) progressText.textContent = Math.floor(progress) + '%';
+                    
+                    // 更新步骤状态
+                    if (progress >= 25 && steps.length > 1 && !steps[1].classList.contains('completed')) {
+                        steps[0].classList.remove('active');
+                        steps[0].classList.add('completed');
+                        steps[0].innerHTML = '✓ 连接数据库';
+                        steps[1].classList.add('active');
+                    }
+                    if (progress >= 50 && steps.length > 2 && !steps[2].classList.contains('completed')) {
+                        steps[1].classList.remove('active');
+                        steps[1].classList.add('completed');
+                        steps[1].innerHTML = '✓ 读取历史记录';
+                        steps[2].classList.add('active');
+                    }
+                    if (progress >= 75 && steps.length > 3 && !steps[3].classList.contains('completed')) {
+                        steps[2].classList.remove('active');
+                        steps[2].classList.add('completed');
+                        steps[2].innerHTML = '✓ 运行算法模型';
+                        steps[3].classList.add('active');
+                    }
                     if (progress >= 100) {
                         clearInterval(analysisInterval);
-                        showToast('AI预测完成，已为您推荐最新方案。');
-                        document.getElementById('ai-status-text').textContent = 'AI预测已完成，结果已更新。';
-                        isAICalculating = false;
+                        analysisInterval = null;
+                        if (steps.length > 3) {
+                            steps[3].classList.remove('active');
+                            steps[3].classList.add('completed');
+                            steps[3].innerHTML = '✓ 生成预测结果';
+                        }
+                        
+                        // 延迟一下再显示历史记录
+                        analysisCompleteTimeout = setTimeout(() => {
+                            if (!isAnalysisRunning) return; // 已停止则不执行
+                            if (analysisLoading) {
+                                analysisLoading.classList.remove('active');
+                                analysisLoading.style.display = 'none';
+                            }
+                            // placeholder已经在启动时隐藏,这里不需要再次设置
+                            if (history) {
+                                history.style.display = 'block';
+                            }
+                            
+                            // 分析完成后按钮保持"停止"状态,由用户手动点击停止
+                            btn.disabled = false;
+                            // 按钮保持"停止AI预测"不变,不自动恢复为启动
+                        }, 500);
                     }
-                }, 360);
-            }, 2800);
+                }, 200);
+            }, 3000);
         }
 
+        // 停止AI预测
         function stopAI() {
-            isAICalculating = false;
-            clearInterval(analysisInterval);
-            clearTimeout(analysisTimeout);
-            document.getElementById('race-track').classList.remove('active');
-            document.getElementById('analysis-loading').classList.remove('active');
-            document.getElementById('ai-status-text').textContent = 'AI预测已停止。';
+            const btn = document.getElementById('btn-start');
+            const placeholder = document.getElementById('ai-placeholder');
+            const waitingTitle = document.getElementById('waiting-title');
+            const waitingDesc = document.getElementById('waiting-desc');
+            const history = document.getElementById('ai-history');
+            const hint = document.getElementById('analysis-hint');
+            
+            // 清除分析定时器
+            isAnalysisRunning = false; // 设置停止标志,防止回调继续执行
+            if (analysisInterval) {
+                clearInterval(analysisInterval);
+                analysisInterval = null;
+            }
+            if (analysisTimeout) {
+                clearTimeout(analysisTimeout);
+                analysisTimeout = null;
+            }
+            if (analysisCompleteTimeout) {
+                clearTimeout(analysisCompleteTimeout);
+                analysisCompleteTimeout = null;
+            }
+            
+            // 停止数据流随机变动效果
             stopDataStream();
+            
+            // 恢复初始界面元素的显示
+            if (placeholder) {
+                placeholder.style.display = 'block';
+            }
+            if (waitingTitle) {
+                waitingTitle.style.display = 'block';
+            }
+            if (waitingDesc) {
+                waitingDesc.style.display = 'block';
+            }
+            
+            // 隐藏历史记录区域
+            if (history) {
+                history.style.display = 'none';
+            }
+            
+            // 隐藏数据分析提示
+            if (hint) {
+                hint.style.display = 'none';
+            }
+            
+            // 重置跑道动画状态
+            const raceTrack = document.getElementById('race-track');
+            if (raceTrack) {
+                raceTrack.classList.remove('active');
+                raceTrack.style.display = ''; // 清除内联display:none,让CSS规则生效
+                // 重置所有选手的动画状态,确保下次启动时能重新播放
+                const runners = document.querySelectorAll('.runner');
+                runners.forEach(runner => {
+                    runner.style.animation = 'none';
+                    runner.style.animationDuration = '';
+                    // 触发重排,确保动画重置生效
+                    void runner.offsetWidth;
+                    runner.style.animation = '';
+                });
+            }
+            
+            // 重置AI分析加载动画状态
+            const analysisLoading = document.getElementById('ai-analysis-loading');
+            if (analysisLoading) {
+                analysisLoading.classList.remove('active');
+                analysisLoading.style.display = 'none';
+            }
+            
+            // 重置进度条和步骤状态
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const steps = document.querySelectorAll('.step');
+            
+            if (progressFill) progressFill.style.width = '0%';
+            if (progressText) progressText.textContent = '0%';
+            
+            // 重置步骤状态
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index === 0) {
+                    step.classList.add('active');
+                    step.innerHTML = '○ 连接数据库';
+                } else {
+                    step.innerHTML = ['○ 读取历史记录', '○ 运行算法模型', '○ 生成预测结果'][index - 1];
+                }
+            });
+            
+            // 恢复按钮状态
+            btn.disabled = false;
+            btn.innerHTML = '<span></span><span>启动AI预测</span>';
+            btn.onclick = startAI; // 改回启动功能
+            
+            showToast('AI预测已停止');
         }
 
+        // 显示球号详情
         function showBallDetail(ball) {
-            showToast(`球号 ${ball} 详情暂未开放`);
+            showToast(`选中生肖: ${ball}`);
         }
 
+        // 显示历史记录详情
         function showHistoryDetail(period) {
-            showToast(`展开第 ${period} 期详情`);
+            showToast(`查看${period}期详情`);
         }
 
+        // 切换统计标签
         function switchTab(btn, period) {
-            document.querySelectorAll('.tab-btn').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            showToast(`切换到${period}统计`);
+            
+            // 隐藏所有盈利统计
+            document.querySelectorAll('.profit-summary').forEach(p => p.classList.remove('active'));
+            
+            // 显示对应的盈利统计
+            const targetProfit = document.getElementById(`profit-${period}`);
+            if (targetProfit) {
+                targetProfit.classList.add('active');
+            }
         }
 
+        // 退出登录
         function handleLogout() {
-            showToast('已退出登录，欢迎下次再来。');
-            switchPage('login');
+            if (confirm('确定要退出登录吗?')) {
+                showToast('已退出登录');
+                setTimeout(() => {
+                    switchPage('login');
+                }, 1000);
+            }
         }
 
+        // Toast提示
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => toast.classList.remove('show'), 2200);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
         }
 
+        // 倒计时逻辑
         let countdownSeconds = 323; // 初始值: 5分23秒
         
         function updateCountdown() {
             if (countdownSeconds <= 0) {
-                countdownSeconds = 323;
+                countdownSeconds = 300; // 重置为5分钟
             }
-            const minutes = String(Math.floor(countdownSeconds / 60)).padStart(2, '0');
-            const seconds = String(countdownSeconds % 60).padStart(2, '0');
-            document.getElementById('countdown-min').textContent = minutes;
-            document.getElementById('countdown-sec').textContent = seconds;
-            countdownSeconds -= 1;
+            
+            const hours = Math.floor(countdownSeconds / 3600);
+            const minutes = Math.floor((countdownSeconds % 3600) / 60);
+            const seconds = countdownSeconds % 60;
+            
+            document.getElementById('hours-0').textContent = Math.floor(hours / 10);
+            document.getElementById('hours-1').textContent = hours % 10;
+            document.getElementById('minutes-0').textContent = Math.floor(minutes / 10);
+            document.getElementById('minutes-1').textContent = minutes % 10;
+            document.getElementById('seconds-0').textContent = Math.floor(seconds / 10);
+            document.getElementById('seconds-1').textContent = seconds % 10;
+            
+            countdownSeconds--;
         }
 
+        // 每秒更新倒计时
         setInterval(updateCountdown, 1000);
-        updateCountdown();
+        updateCountdown(); // 立即执行一次
 
+        // 初始化:从登录页开始
         switchPage('login');
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
